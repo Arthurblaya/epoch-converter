@@ -1,17 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { format, formatDistanceToNow } from "date-fns";
-import { enUS } from "date-fns/locale";
-import ClipboardIcon from "@/icons/clipBoardIcon";
+import DateFormatter from "./dateFormatter";
 
 export default function EpochConverter() {
   const [epochInput, setEpochInput] = useState("");
-  const [result, setResult] = useState<{
-    formattedUTC: string;
-    formattedLocal: string;
-    relativeTime: string;
-    timeType: "seconds" | "milliseconds" | "microseconds";
-  } | null>(null);
+  const [date, setDate] = useState<Date | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,13 +12,6 @@ export default function EpochConverter() {
     setEpochInput(currentEpoch);
     convertEpoch(currentEpoch);
   }, []);
-
-  const determineTimeType = (epoch: number) => {
-    if (epoch < 1e12) return "seconds";
-    if (epoch < 1e15) return "milliseconds";
-    if (epoch < 1e18) return "microseconds";
-    return null;
-  };
 
   const convertEpoch = (input?: string) => {
     setError(null);
@@ -38,45 +24,30 @@ export default function EpochConverter() {
       return;
     }
 
-    const timeType = determineTimeType(epoch);
-    if (!timeType) {
+    if (epoch < 1e12) {
+    } else if (epoch < 1e15) {
+      epoch = Math.floor(epoch / 1000);
+    } else if (epoch < 1e18) {
+      epoch = Math.floor(epoch / 1_000_000);
+    } else {
       setError("Invalid epoch timestamp. The number is too large.");
       return;
     }
 
-    if (timeType === "milliseconds") epoch = Math.floor(epoch / 1000);
-    if (timeType === "microseconds") epoch = Math.floor(epoch / 1_000_000);
-
-    const date = new Date(epoch * 1000);
-    if (isNaN(date.getTime())) {
+    const newDate = new Date(epoch * 1000);
+    if (isNaN(newDate.getTime())) {
       setError("Invalid timestamp. Please enter a valid number.");
       return;
     }
 
-    setResult({
-      timeType,
-      formattedUTC: format(date, "PPPP HH:mm:ss 'UTC'", { locale: enUS }),
-      formattedLocal: date.toLocaleString("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "short",
-      }),
-      relativeTime: formatDistanceToNow(date, { locale: enUS, addSuffix: true }),
-    });
-  };
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+    setDate(newDate);
   };
 
   return (
     <div className="mt-8 flex flex-col gap-4">
-      <h2 className="text-secondary text-2xl">Convert Epoch to Readable Date</h2>
+      <h2 className="text-secondary text-2xl">
+        Convert Epoch to Readable Date
+      </h2>
 
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
@@ -98,55 +69,11 @@ export default function EpochConverter() {
         {error && <p className="text-error text-sm">{error}</p>}
       </div>
 
-      <p className="text-sm">Supports Unix timestamps in seconds, milliseconds, and microseconds.</p>
+      <p className="text-sm">
+        Supports Unix timestamps in seconds, milliseconds, and microseconds.
+      </p>
 
-      {result && (
-        <div>
-          <h3>
-            <span className={result.timeType === "seconds" ? "font-semibold" : ""}>
-              Unix Time in Seconds
-            </span>{" "}
-            |{" "}
-            <span className={result.timeType === "milliseconds" ? "font-semibold" : ""}>
-              Milliseconds
-            </span>{" "}
-            |{" "}
-            <span className={result.timeType === "microseconds" ? "font-semibold" : ""}>
-              Microseconds
-            </span>
-          </h3>
-
-          <div className="flex items-center gap-2">
-            <p>
-              <strong>GMT/UTC:</strong> {result.formattedUTC}
-            </p>
-            <button
-              onClick={() => copyToClipboard(result.formattedUTC)}
-              className="text-neutral hover:text-primary focus:text-primary cursor-pointer"
-            >
-              <ClipboardIcon className="size-5" />
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <p>
-              <strong>Local Time:</strong> {result.formattedLocal}
-            </p>
-            <button
-              onClick={() => copyToClipboard(result.formattedLocal)}
-              className="text-neutral hover:text-primary focus:text-primary cursor-pointer"
-            >
-              <ClipboardIcon className="size-5" />
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <p>
-              <strong>Relative:</strong> {result.relativeTime}
-            </p>
-          </div>
-        </div>
-      )}
+      {date && <DateFormatter date={date} />}
     </div>
   );
 }
