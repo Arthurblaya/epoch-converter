@@ -7,12 +7,6 @@ export default function EpochConverter() {
   const [date, setDate] = useState<Date | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const currentEpoch = Math.floor(Date.now() / 1000).toString();
-    setEpochInput(currentEpoch);
-    convertEpoch(currentEpoch);
-  }, []);
-
   const convertEpoch = (input?: string) => {
     setError(null);
     const epochStr = input ?? epochInput;
@@ -42,6 +36,12 @@ export default function EpochConverter() {
 
     setDate(newDate);
   };
+
+  useEffect(() => {
+    const currentEpoch = Math.floor(Date.now() / 1000).toString();
+    setEpochInput(currentEpoch);
+    convertEpoch(currentEpoch);
+  }, [convertEpoch]);
 
   return (
     <div className="mt-8 flex flex-col gap-4">

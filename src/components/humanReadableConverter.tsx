@@ -72,7 +72,6 @@ export default function HumanReadableConverter() {
         dateInstance = new Date(Date.UTC(y, m, d, h, min, s, ms));
       } else {
         const localDate = new Date(y, m, d, h, min, s, ms);
-        const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const utcDateStr = formatInTimeZone(
           localDate,
           "UTC",
@@ -82,7 +81,7 @@ export default function HumanReadableConverter() {
       }
 
       setDate(dateInstance);
-    } catch (e) {
+    } catch {
       setError("Error converting date. Check your inputs.");
     }
   };

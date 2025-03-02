@@ -1,7 +1,8 @@
 import CurrentEpoch from "@/components/currentEpoch";
-import { consoleFont } from "./layout";
+
 import EpochConverter from "@/components/epochConverter";
 import HumanReadableConverter from "@/components/humanReadableConverter";
+import { consoleFont } from "@/fonts/inconsolata";
 
 export default function Home() {
   return (

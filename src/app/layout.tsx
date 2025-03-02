@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header";
-import { Inconsolata } from "next/font/google";
-
-export const consoleFont = Inconsolata({
-  weight: "700",
-  subsets: ["latin"]
-});
 
 export const metadata: Metadata = {
   title: "Epoch Converter",

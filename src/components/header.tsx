@@ -1,4 +1,4 @@
-import { consoleFont } from "@/app/layout";
+import { consoleFont } from "@/fonts/inconsolata";
 import ClockIcon from "@/icons/clockIcon";
 
 export default function Header() {
