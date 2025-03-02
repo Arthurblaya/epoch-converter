@@ -32,9 +32,7 @@ export default function CurrentEpoch() {
   }, []);
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      console.log(`Copied: ${text}`);
-    });
+    navigator.clipboard.writeText(text);
   };
 
   return (
@@ -46,7 +44,7 @@ export default function CurrentEpoch() {
         <span className="font-bold">{epoch !== null ? epoch : "Loading..."}</span>
         <button
           onClick={() => epoch !== null && copyToClipboard(epoch.toString())}
-          className="text-gray-500 hover:text-primary focus:text-primary cursor-pointer"
+          className="text-neutral hover:text-primary focus:text-primary cursor-pointer"
         >
           <ClipboardIcon className="size-5" />
         </button>
@@ -56,7 +54,7 @@ export default function CurrentEpoch() {
         <span>{utcTime !== null ? utcTime : "Loading..."}</span>
         <button
           onClick={() => utcTime !== null && copyToClipboard(utcTime)}
-          className="text-gray-500 hover:text-primary focus:text-primary cursor-pointer"
+          className="text-neutral hover:text-primary focus:text-primary cursor-pointer"
         >
           <ClipboardIcon className="size-5" />
         </button>

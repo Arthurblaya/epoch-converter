@@ -1,5 +1,6 @@
 import CurrentEpoch from "@/components/currentEpoch";
 import { consoleFont } from "./layout";
+import EpochConverter from "@/components/epochConverter";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
           Epoch & Unix Time Conversion Utility
         </h1>
         <CurrentEpoch />
+        <EpochConverter/>
       </div>
     </div>
   );
