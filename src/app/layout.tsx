@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-theme="light" lang="en">
+    <html data-theme="epochTheme" lang="en">
       <body className="antialiased">
         <div className="flex flex-col min-h-screen">
           <div className="flex-1">

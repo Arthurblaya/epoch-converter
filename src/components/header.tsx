@@ -11,7 +11,8 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="size-7 text-primary"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -19,8 +20,10 @@ export default function Header() {
               d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-          <h1 className={`${consoleFont.className} text-lg leading-[1.2]`}>
-            Epoch Converter
+
+          <h1 className={`${consoleFont.className} text-xl font-bold leading-[1.1]`}>
+            <span className="text-primary">Epoch</span>{" "}
+            <span className="">Converter</span>
           </h1>
         </div>
       </div>
