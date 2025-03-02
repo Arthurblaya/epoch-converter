@@ -1,5 +1,6 @@
 "use client";
-import { format, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { enUS } from "date-fns/locale";
 import ClipboardIcon from "@/icons/clipBoardIcon";
 
@@ -14,31 +15,40 @@ export default function DateFormatter({ date }: DateFormatterProps) {
   const epochMilliseconds = date.getTime();
   const epochMicroseconds = date.getTime() * 1_000;
 
-  const formattedUTC = format(date, "PPPP HH:mm:ss 'UTC'", { locale: enUS });
-  const formattedLocal = date.toLocaleString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    timeZoneName: "short",
+  const formattedUTC = formatInTimeZone(
+    date,
+    "UTC",
+    "EEEE, d MMMM yyyy HH:mm:ss 'UTC'",
+    { locale: enUS }
+  );
+
+  const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const formattedLocal = formatInTimeZone(
+    date,
+    localTimeZone,
+    "EEEE, d MMMM yyyy HH:mm:ss zzz",
+    { locale: enUS }
+  );
+
+  const relativeTime = formatDistanceToNow(date, {
+    locale: enUS,
+    addSuffix: true,
   });
-  const relativeTime = formatDistanceToNow(date, { locale: enUS, addSuffix: true });
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
   };
 
   return (
-    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
       {/* Formatted Time Section */}
       <div className="flex flex-col gap-2">
         <h3 className="text-xl font-semibold">Formatted Time</h3>
 
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <span className="whitespace-nowrap"><strong>GMT/UTC:</strong> {formattedUTC}</span>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <span className="whitespace-nowrap min-w-0 truncate">
+            <strong>GMT/UTC:</strong> {formattedUTC}
+          </span>
           <button
             onClick={() => copyToClipboard(formattedUTC)}
             className="shrink-0 text-neutral hover:text-primary cursor-pointer"
@@ -47,8 +57,10 @@ export default function DateFormatter({ date }: DateFormatterProps) {
           </button>
         </div>
 
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <span className="whitespace-nowrap"><strong>Local Time:</strong> {formattedLocal}</span>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <span className="whitespace-nowrap min-w-0 truncate">
+            <strong>Local Time:</strong> {formattedLocal}
+          </span>
           <button
             onClick={() => copyToClipboard(formattedLocal)}
             className="shrink-0 text-neutral hover:text-primary cursor-pointer"
@@ -57,15 +69,19 @@ export default function DateFormatter({ date }: DateFormatterProps) {
           </button>
         </div>
 
-        <p><strong>Relative:</strong> {relativeTime}</p>
+        <p>
+          <strong>Relative:</strong> {relativeTime}
+        </p>
       </div>
 
       {/* Epoch Section */}
       <div className="flex flex-col gap-2">
         <h3 className="text-xl font-semibold">Epoch</h3>
 
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <span className="whitespace-nowrap"><strong>Seconds:</strong> {epochSeconds}</span>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <span className="whitespace-nowrap min-w-0 truncate">
+            <strong>Seconds:</strong> {epochSeconds}
+          </span>
           <button
             onClick={() => copyToClipboard(epochSeconds.toString())}
             className="shrink-0 text-neutral hover:text-primary cursor-pointer"
@@ -74,8 +90,10 @@ export default function DateFormatter({ date }: DateFormatterProps) {
           </button>
         </div>
 
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <span className="whitespace-nowrap"><strong>Milliseconds:</strong> {epochMilliseconds}</span>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <span className="whitespace-nowrap min-w-0 truncate">
+            <strong>Milliseconds:</strong> {epochMilliseconds}
+          </span>
           <button
             onClick={() => copyToClipboard(epochMilliseconds.toString())}
             className="shrink-0 text-neutral hover:text-primary cursor-pointer"
@@ -84,8 +102,10 @@ export default function DateFormatter({ date }: DateFormatterProps) {
           </button>
         </div>
 
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <span className="whitespace-nowrap"><strong>Microseconds:</strong> {epochMicroseconds}</span>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <span className="whitespace-nowrap min-w-0 truncate">
+            <strong>Microseconds:</strong> {epochMicroseconds}
+          </span>
           <button
             onClick={() => copyToClipboard(epochMicroseconds.toString())}
             className="shrink-0 text-neutral hover:text-primary cursor-pointer"
