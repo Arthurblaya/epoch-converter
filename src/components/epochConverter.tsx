@@ -3,47 +3,43 @@ import { useState, useEffect, useCallback } from "react";
 import DateFormatter from "./dateFormatter";
 
 export default function EpochConverter() {
-  const [epochInput, setEpochInput] = useState("");
+  const [epochInput, setEpochInput] = useState(() =>
+    Math.floor(Date.now() / 1000).toString()
+  );
   const [date, setDate] = useState<Date | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const convertEpoch = useCallback(
-    (input?: string) => {
-      setError(null);
-      const epochStr = input ?? epochInput;
-      if (!epochStr) return;
+  const convertEpoch = useCallback((input: string) => {
+    setError(null);
+    if (!input) return;
 
-      let epoch = Number(epochStr);
-      if (isNaN(epoch) || epoch <= 0) {
-        setError("Invalid timestamp. Please enter a valid number.");
-        return;
-      }
+    let epoch = Number(input);
+    if (isNaN(epoch) || epoch <= 0) {
+      setError("Invalid timestamp. Please enter a valid number.");
+      return;
+    }
 
-      if (epoch < 1e12) {
-      } else if (epoch < 1e15) {
-        epoch = Math.floor(epoch / 1000);
-      } else if (epoch < 1e18) {
-        epoch = Math.floor(epoch / 1_000_000);
-      } else {
-        setError("Invalid epoch timestamp. The number is too large.");
-        return;
-      }
+    if (epoch < 1e12) {
+    } else if (epoch < 1e15) {
+      epoch = Math.floor(epoch / 1000);
+    } else if (epoch < 1e18) {
+      epoch = Math.floor(epoch / 1_000_000);
+    } else {
+      setError("Invalid epoch timestamp. The number is too large.");
+      return;
+    }
 
-      const newDate = new Date(epoch * 1000);
-      if (isNaN(newDate.getTime())) {
-        setError("Invalid timestamp. Please enter a valid number.");
-        return;
-      }
+    const newDate = new Date(epoch * 1000);
+    if (isNaN(newDate.getTime())) {
+      setError("Invalid timestamp. Please enter a valid number.");
+      return;
+    }
 
-      setDate(newDate);
-    },
-    [epochInput]
-  );
+    setDate(newDate);
+  }, []);
 
   useEffect(() => {
-    const currentEpoch = Math.floor(Date.now() / 1000).toString();
-    setEpochInput(currentEpoch);
-    convertEpoch(currentEpoch);
+    convertEpoch(epochInput);
   }, [convertEpoch]);
 
   return (
@@ -63,7 +59,7 @@ export default function EpochConverter() {
           />
           <button
             className="btn btn-accent"
-            onClick={() => convertEpoch()}
+            onClick={() => convertEpoch(epochInput)}
             disabled={!epochInput || isNaN(Number(epochInput))}
           >
             Convert
