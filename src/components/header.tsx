@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className="p-4">
       <div className="container mx-auto flex max-w-screen-lg items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
