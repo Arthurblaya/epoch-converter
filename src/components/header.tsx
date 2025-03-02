@@ -21,7 +21,9 @@ export default function Header() {
             />
           </svg>
 
-          <h1 className={`${consoleFont.className} text-xl font-bold leading-[1.1]`}>
+          <h1
+            className={`${consoleFont.className} text-xl font-bold`}
+          >
             <span className="text-primary">Epoch</span>{" "}
             <span className="">Converter</span>
           </h1>
