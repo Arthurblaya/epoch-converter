@@ -7,26 +7,26 @@
   prefersdark: false;
   color-scheme: light;
 
-  --color-base-100: #F2F2F0;
-  --color-base-200: #E8E8E5;
-  --color-base-300: #D1D1CC;
-  --color-base-content: #3B3B3B;
+  --color-base-100: #F8F8F8;
+  --color-base-200: #EDEDED;
+  --color-base-300: #D6D6D6;
+  --color-base-content: #303030;
   --color-primary: #7D2E2E;
-  --color-primary-content: #F8F5F2;
+  --color-primary-content: #FFFFFF;
   --color-secondary: #2E5D7D;
-  --color-secondary-content: #F8F5F2;
+  --color-secondary-content: #FFFFFF;
   --color-accent: #C9A227;
-  --color-accent-content: #3B3B3B;
-  --color-neutral: #525252;
-  --color-neutral-content: #F8F5F2;
+  --color-accent-content: #303030;
+  --color-neutral: #505050;
+  --color-neutral-content: #FFFFFF;
   --color-info: #2E5D7D;
-  --color-info-content: #F8F5F2;
-  --color-success: #4B7F52;
-  --color-success-content: #F8F5F2;
+  --color-info-content: #FFFFFF;
+  --color-success: #417A47;
+  --color-success-content: #FFFFFF;
   --color-warning: #C99400;
-  --color-warning-content: #3B3B3B;
+  --color-warning-content: #303030;
   --color-error: #B03030;
-  --color-error-content: #F8F5F2;
+  --color-error-content: #FFFFFF;
 
   /* border radius */
   --radius-selector: 1rem;
@@ -50,26 +50,26 @@
   prefersdark: true;
   color-scheme: dark;
 
-  --color-base-100: #1E1E1C;
-  --color-base-200: #252522;
-  --color-base-300: #3B3B38;
-  --color-base-content: #E8E8E5;
-  --color-primary: #9A3B3B;
-  --color-primary-content: #F2F2F0;
-  --color-secondary: #3B7299;
-  --color-secondary-content: #F2F2F0;
-  --color-accent: #D4AF37;
-  --color-accent-content: #1E1E1C;
-  --color-neutral: #3B3B3B;
-  --color-neutral-content: #E8E8E5;
-  --color-info: #3B7299;
-  --color-info-content: #E8E8E5;
-  --color-success: #5A9962;
-  --color-success-content: #F2F2F0;
-  --color-warning: #D4A000;
-  --color-warning-content: #1E1E1C;
-  --color-error: #C0392B;
-  --color-error-content: #F2F2F0;
+  --color-base-100: #1E1E1E;
+  --color-base-200: #2A2A2A;
+  --color-base-300: #444444;
+  --color-base-content: #E5E5E5;
+  --color-primary: #9A3A3A;
+  --color-primary-content: #F8F8F8;
+  --color-secondary: #3578A0;
+  --color-secondary-content: #F8F8F8;
+  --color-accent: #E0B52E;
+  --color-accent-content: #1E1E1E;
+  --color-neutral: #444444;
+  --color-neutral-content: #E5E5E5;
+  --color-info: #3C80A0;
+  --color-info-content: #E5E5E5;
+  --color-success: #5C9561;
+  --color-success-content: #F8F8F8;
+  --color-warning: #E0A500;
+  --color-warning-content: #1E1E1E;
+  --color-error: #C04040;
+  --color-error-content: #F8F8F8;
 
   /* border radius */
   --radius-selector: 1rem;
