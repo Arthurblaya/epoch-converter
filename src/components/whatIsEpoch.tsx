@@ -1,6 +1,6 @@
 export default function WhatIsEpoch() {
   return (
-    <div className="text-base-content mt-12">
+    <section className="text-base-content mt-12">
       <h2 className="text-2xl text-secondary mb-4">What is Epoch?</h2>
       <p className="text-base mb-4">
         The Epoch time is the current time measured in the number of seconds
@@ -43,6 +43,6 @@ export default function WhatIsEpoch() {
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
   );
 }
