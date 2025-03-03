@@ -1,5 +1,5 @@
 import DynamicConverters from "@/components/dynamicConverters";
-import ProgrammingWithEpoch from "@/components/programmingWithEpoch";
+import DocsProgrammingWithEpoch from "@/components/docsProgrammingWithEpoch";
 import WhatIsEpoch from "@/components/whatIsEpoch";
 import { consoleFont } from "@/fonts/inconsolata";
 
@@ -12,7 +12,7 @@ export default function Home() {
         </h1>
         <DynamicConverters />
         <WhatIsEpoch />
-        <ProgrammingWithEpoch />
+        <DocsProgrammingWithEpoch />
       </div>
     </div>
   );
