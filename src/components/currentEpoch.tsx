@@ -53,7 +53,7 @@ export default function CurrentEpoch() {
         <span className="font-bold">{epochData.epoch || "Loading..."}</span>
         <button
           onClick={() => copyToClipboard(epochData.epoch.toString())}
-          className="text-neutral hover:text-primary focus:text-primary cursor-pointer"
+          className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
         >
           <ClipboardIcon className="size-5" />
         </button>
@@ -63,7 +63,7 @@ export default function CurrentEpoch() {
         <span>{epochData.utcTime || "Loading..."}</span>
         <button
           onClick={() => copyToClipboard(epochData.utcTime)}
-          className="text-neutral hover:text-primary focus:text-primary cursor-pointer"
+          className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
         >
           <ClipboardIcon className="size-5" />
         </button>

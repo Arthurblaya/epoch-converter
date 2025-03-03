@@ -39,30 +39,30 @@ export default function DateFormatter({ date }: DateFormatterProps) {
   };
 
   return (
-    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+    <div className="mt-4 flex flex-col sm:flex-row sm:gap-12 gap-8">
       {/* Formatted Time Section */}
       <div className="flex flex-col gap-2">
         <h3 className="text-xl font-semibold">Formatted Time</h3>
 
-        <div className="flex items-center justify-between flex-wrap gap-2">
+        <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>GMT/UTC:</strong> {formattedUTC}
           </span>
           <button
             onClick={() => copyToClipboard(formattedUTC)}
-            className="shrink-0 text-neutral hover:text-primary cursor-pointer"
+            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
           >
             <ClipboardIcon className="size-4" />
           </button>
         </div>
 
-        <div className="flex items-center justify-between flex-wrap gap-2">
+        <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>Local Time:</strong> {formattedLocal}
           </span>
           <button
             onClick={() => copyToClipboard(formattedLocal)}
-            className="shrink-0 text-neutral hover:text-primary cursor-pointer"
+            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
           >
             <ClipboardIcon className="size-4" />
           </button>
@@ -77,37 +77,37 @@ export default function DateFormatter({ date }: DateFormatterProps) {
       <div className="flex flex-col gap-2">
         <h3 className="text-xl font-semibold">Epoch</h3>
 
-        <div className="flex items-center justify-between flex-wrap gap-2">
+        <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>Seconds:</strong> {epochSeconds}
           </span>
           <button
             onClick={() => copyToClipboard(epochSeconds.toString())}
-            className="shrink-0 text-neutral hover:text-primary cursor-pointer"
+            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
           >
             <ClipboardIcon className="size-4" />
           </button>
         </div>
 
-        <div className="flex items-center justify-between flex-wrap gap-2">
+        <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>Milliseconds:</strong> {epochMilliseconds}
           </span>
           <button
             onClick={() => copyToClipboard(epochMilliseconds.toString())}
-            className="shrink-0 text-neutral hover:text-primary cursor-pointer"
+            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
           >
             <ClipboardIcon className="size-4" />
           </button>
         </div>
 
-        <div className="flex items-center justify-between flex-wrap gap-2">
+        <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>Microseconds:</strong> {epochMicroseconds}
           </span>
           <button
             onClick={() => copyToClipboard(epochMicroseconds.toString())}
-            className="shrink-0 text-neutral hover:text-primary cursor-pointer"
+            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
           >
             <ClipboardIcon className="size-4" />
           </button>
