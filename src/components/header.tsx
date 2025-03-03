@@ -4,7 +4,7 @@ import ThemeChanger from "./themeChanger";
 
 export default function Header() {
   return (
-    <header className="p-4">
+    <header className="p-4 backdrop-blur-lg sticky top-0 z-50">
       <div className="container mx-auto flex max-w-screen-xl items-center justify-between">
         <div className="flex items-center gap-2 cursor-pointer">
           <ClockIcon className="size-7 text-primary" />
