@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/header";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Epoch Converter",
@@ -21,14 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-theme="epochTheme" lang="en">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className="antialiased">
-        <div className="flex flex-col min-h-screen">
-          <div className="flex-1">
+        <ThemeProvider defaultTheme="light">
+          <div className="flex flex-col min-h-screen">
             <Header />
-            {children}
+            <div className="flex-1">{children}</div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

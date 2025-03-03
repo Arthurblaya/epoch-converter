@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui";
-@plugin "daisyui/theme" {
-  name: "epochTheme";
+
+[data-theme="light"] {
   default: true;
   prefersdark: false;
   color-scheme: light;
@@ -19,14 +19,57 @@
   --color-accent-content: #3B3B3B;
   --color-neutral: #525252;
   --color-neutral-content: #F8F5F2;
-  --color-info: #2E5D7D; 
+  --color-info: #2E5D7D;
   --color-info-content: #F8F5F2;
-  --color-success: #4B7F52; 
+  --color-success: #4B7F52;
   --color-success-content: #F8F5F2;
-  --color-warning: #C99400; 
+  --color-warning: #C99400;
   --color-warning-content: #3B3B3B;
-  --color-error: #B03030; 
+  --color-error: #B03030;
   --color-error-content: #F8F5F2;
+
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 1;
+  --noise: 0;
+}
+
+[data-theme="dark"] {
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-base-100: #1E1E1C;
+  --color-base-200: #252522;
+  --color-base-300: #3B3B38;
+  --color-base-content: #E8E8E5;
+  --color-primary: #9A3B3B;
+  --color-primary-content: #F2F2F0;
+  --color-secondary: #3B7299;
+  --color-secondary-content: #F2F2F0;
+  --color-accent: #D4AF37;
+  --color-accent-content: #1E1E1C;
+  --color-neutral: #3B3B3B;
+  --color-neutral-content: #E8E8E5;
+  --color-info: #3B7299;
+  --color-info-content: #E8E8E5;
+  --color-success: #5A9962;
+  --color-success-content: #F2F2F0;
+  --color-warning: #D4A000;
+  --color-warning-content: #1E1E1C;
+  --color-error: #C0392B;
+  --color-error-content: #F2F2F0;
 
   /* border radius */
   --radius-selector: 1rem;
