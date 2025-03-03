@@ -1,7 +1,5 @@
 import CurrentEpoch from "@/components/currentEpoch";
-
-import EpochConverter from "@/components/epochConverter";
-import HumanReadableConverter from "@/components/humanReadableConverter";
+import DynamicConverters from "@/components/dynamicConverters";
 import { consoleFont } from "@/fonts/inconsolata";
 
 export default function Home() {
@@ -12,8 +10,7 @@ export default function Home() {
           Epoch & Unix Time Conversion Utility
         </h1>
         <CurrentEpoch />
-        <EpochConverter />
-        <HumanReadableConverter />
+        <DynamicConverters />
       </div>
     </div>
   );
