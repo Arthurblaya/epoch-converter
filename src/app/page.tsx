@@ -1,4 +1,3 @@
-import CurrentEpoch from "@/components/currentEpoch";
 import DynamicConverters from "@/components/dynamicConverters";
 import { consoleFont } from "@/fonts/inconsolata";
 
@@ -9,7 +8,6 @@ export default function Home() {
         <h1 className={`${consoleFont.className} text-primary text-3xl`}>
           Epoch & Unix Time Conversion Utility
         </h1>
-        <CurrentEpoch />
         <DynamicConverters />
       </div>
     </div>
