@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ClipboardIcon from "@/icons/clipBoardIcon";
 
 export default function CurrentEpoch() {
   const [epochData, setEpochData] = useState({
     epoch: 0,
-    utcTime: "",
+    utcTime: "Loading...",
   });
+
+  const requestRef = useRef<number | null>(null);
 
   useEffect(() => {
     const updateTime = () => {
@@ -27,13 +29,14 @@ export default function CurrentEpoch() {
             hour12: false,
           }) + " UTC",
       });
+
+      requestRef.current = requestAnimationFrame(updateTime);
     };
 
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
+    requestRef.current = requestAnimationFrame(updateTime);
 
     return () => {
-      clearInterval(interval);
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, []);
 
