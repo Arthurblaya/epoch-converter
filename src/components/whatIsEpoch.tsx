@@ -34,11 +34,11 @@ export default function WhatIsEpoch() {
             </tr>
             <tr className="border-t border-base-300">
               <td className="p-3">1 month (30.44 days)</td>
-              <td className="p-3">2,629,743 seconds</td>
+              <td className="p-3">2629743 seconds</td>
             </tr>
             <tr className="border-t border-base-300">
               <td className="p-3">1 year (365.24 days)</td>
-              <td className="p-3">31,556,926 seconds</td>
+              <td className="p-3">31556926 seconds</td>
             </tr>
           </tbody>
         </table>
