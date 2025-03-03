@@ -1,4 +1,3 @@
-"use client";
 import { formatDistanceToNow } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { enUS } from "date-fns/locale";
