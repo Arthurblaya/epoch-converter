@@ -6,7 +6,7 @@ export default function DocsConvertEpochToHumanDate() {
       </h2>
       <p className="text-base mb-4">
         Convert an Epoch timestamp into a human-readable date using various
-        programming languages.  The examples below all show how to convert the
+        programming languages. The examples below all show how to convert the
         epoch timestamp `1698402600` (which represents 2023-10-27 10:30:00 UTC).
       </p>
       <div className="overflow-x-auto">
@@ -38,7 +38,10 @@ export default function DocsConvertEpochToHumanDate() {
             <tr className="border-t border-base-300">
               <td className="p-3">C</td>
               <td className="p-3">
-                <code>Use localtime() to convert to struct tm, then strftime() to format.</code>
+                <code>
+                  Use localtime() to convert to struct tm, then strftime() to
+                  format.
+                </code>
               </td>
               <td className="p-3">
                 <a
@@ -54,7 +57,9 @@ export default function DocsConvertEpochToHumanDate() {
             <tr className="border-t border-base-300">
               <td className="p-3">C#</td>
               <td className="p-3">
-                <code>DateTimeOffset.FromUnixTimeSeconds(1698402600).UtcDateTime.ToString()</code>
+                <code>
+                  DateTimeOffset.FromUnixTimeSeconds(1698402600).UtcDateTime.ToString()
+                </code>
               </td>
               <td className="p-3">
                 <a
@@ -70,7 +75,10 @@ export default function DocsConvertEpochToHumanDate() {
             <tr className="border-t border-base-300">
               <td className="p-3">C++</td>
               <td className="p-3">
-                <code>Use std::localtime() to convert to std::tm, then std::strftime() to format.</code>
+                <code>
+                  Use std::localtime() to convert to std::tm, then
+                  std::strftime() to format.
+                </code>
               </td>
               <td className="p-3">
                 <a
@@ -102,7 +110,10 @@ export default function DocsConvertEpochToHumanDate() {
             <tr className="border-t border-base-300">
               <td className="p-3">Dart (Flutter)</td>
               <td className="p-3">
-                <code>DateTime.fromMillisecondsSinceEpoch(1698402600 * 1000, isUtc: true)</code>
+                <code>
+                  DateTime.fromMillisecondsSinceEpoch(1698402600 * 1000, isUtc:
+                  true)
+                </code>
               </td>
               <td className="p-3">
                 <a
@@ -134,7 +145,9 @@ export default function DocsConvertEpochToHumanDate() {
             <tr className="border-t border-base-300">
               <td className="p-3">Java</td>
               <td className="p-3">
-                <code>Instant.ofEpochSecond(1698402600).atZone(ZoneOffset.UTC)</code>
+                <code>
+                  Instant.ofEpochSecond(1698402600).atZone(ZoneOffset.UTC)
+                </code>
               </td>
               <td className="p-3">
                 <a
@@ -163,10 +176,10 @@ export default function DocsConvertEpochToHumanDate() {
                 </a>
               </td>
             </tr>
-             <tr className="border-t border-base-300">
+            <tr className="border-t border-base-300">
               <td className="p-3">Lua</td>
               <td className="p-3">
-                <code>os.date("%Y-%m-%d %H:%M:%S", 1698402600)</code>
+                <code>{'os.date("%Y-%m-%d %H:%M:%S", 1698402600)'}</code>
               </td>
               <td className="p-3">
                 <a
@@ -182,7 +195,7 @@ export default function DocsConvertEpochToHumanDate() {
             <tr className="border-t border-base-300">
               <td className="p-3">PHP</td>
               <td className="p-3">
-                <code>date('Y-m-d H:i:s', 1698402600)</code>
+                <code>{"date('Y-m-d H:i:s', 1698402600)"}</code>
               </td>
               <td className="p-3">
                 <a
@@ -211,10 +224,12 @@ export default function DocsConvertEpochToHumanDate() {
                 </a>
               </td>
             </tr>
-             <tr className="border-t border-base-300">
+            <tr className="border-t border-base-300">
               <td className="p-3">R</td>
               <td className="p-3">
-                <code>as.POSIXct(1698402600, origin='1970-01-01', tz='UTC')</code>
+                <code>
+                  {"as.POSIXct(1698402600, origin='1970-01-01', tz='UTC')"}
+                </code>
               </td>
               <td className="p-3">
                 <a
@@ -246,7 +261,10 @@ export default function DocsConvertEpochToHumanDate() {
             <tr className="border-t border-base-300">
               <td className="p-3">Rust</td>
               <td className="p-3">
-                <code> Use the chrono crate: NaiveDateTime::from_timestamp_opt().</code>
+                <code>
+                  {" "}
+                  Use the chrono crate: NaiveDateTime::from_timestamp_opt().
+                </code>
               </td>
               <td className="p-3">
                 <a
@@ -266,14 +284,14 @@ export default function DocsConvertEpochToHumanDate() {
               </td>
               <td className="p-3">
                 <a
-                 href="https://developer.apple.com/documentation/foundation/date/1779759-init"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 className="text-primary hover:underline"
+                  href="https://developer.apple.com/documentation/foundation/date/1779759-init"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
                 >
                   Swift Docs (Date)
                 </a>
-                </td>
+              </td>
             </tr>
             <tr className="border-t border-base-300">
               <td className="p-3">TypeScript</td>
@@ -291,7 +309,6 @@ export default function DocsConvertEpochToHumanDate() {
                 </a>
               </td>
             </tr>
-
           </tbody>
         </table>
       </div>
