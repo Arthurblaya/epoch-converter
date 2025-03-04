@@ -2,56 +2,48 @@
 import { useState, useEffect } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import DateFormatter from "./dateFormatter";
+import { useTimeZone } from "@/context/timeZoneContext";
 
 export default function HumanReadableConverter() {
-  const [year, setYear] = useState("");
-  const [month, setMonth] = useState("");
-  const [day, setDay] = useState("");
-  const [hour, setHour] = useState("");
-  const [minute, setMinute] = useState("");
-  const [second, setSecond] = useState("");
-  const [millisecond, setMillisecond] = useState("");
-  const [timezone, setTimezone] = useState("GMT");
+  const { timeZone } = useTimeZone();
+  const [datetime, setDatetime] = useState({
+    year: "",
+    month: "",
+    day: "",
+    hour: "",
+    minute: "",
+    second: "",
+    millisecond: "",
+  });
+  const [selectedTimeZone, setSelectedTimeZone] = useState("UTC");
   const [date, setDate] = useState<Date | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const now = new Date();
-    setYear(now.getUTCFullYear().toString());
-    setMonth((now.getUTCMonth() + 1).toString().padStart(2, "0"));
-    setDay(now.getUTCDate().toString().padStart(2, "0"));
-    setHour(now.getUTCHours().toString().padStart(2, "0"));
-    setMinute(now.getUTCMinutes().toString().padStart(2, "0"));
-    setSecond(now.getUTCSeconds().toString().padStart(2, "0"));
-    setMillisecond(now.getUTCMilliseconds().toString().padStart(3, "0"));
-
-    setDate(
-      new Date(
-        Date.UTC(
-          now.getUTCFullYear(),
-          now.getUTCMonth(),
-          now.getUTCDate(),
-          now.getUTCHours(),
-          now.getUTCMinutes(),
-          now.getUTCSeconds(),
-          now.getUTCMilliseconds()
-        )
-      )
-    );
+    setDatetime({
+      year: now.getUTCFullYear().toString(),
+      month: (now.getUTCMonth() + 1).toString().padStart(2, "0"),
+      day: now.getUTCDate().toString().padStart(2, "0"),
+      hour: now.getUTCHours().toString().padStart(2, "0"),
+      minute: now.getUTCMinutes().toString().padStart(2, "0"),
+      second: now.getUTCSeconds().toString().padStart(2, "0"),
+      millisecond: now.getUTCMilliseconds().toString().padStart(3, "0"),
+    });
   }, []);
 
   const handleInputChange =
-    (setter: (value: string) => void, maxDigits: number, maxValue?: number) =>
+    (key: keyof typeof datetime, maxDigits: number, maxValue?: number) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      let value = e.target.value.replace(/\D/g, ""); // Solo números
-      if (value.length > maxDigits) value = value.slice(0, maxDigits);
+      let value = e.target.value.replace(/\D/g, "").slice(0, maxDigits);
       if (maxValue !== undefined && parseInt(value, 10) > maxValue) return;
-      setter(value);
+      setDatetime((prev) => ({ ...prev, [key]: value }));
     };
 
   const convertToEpoch = () => {
     setError(null);
 
+    const { year, month, day, hour, minute, second, millisecond } = datetime;
     const y = parseInt(year, 10);
     const m = parseInt(month, 10) - 1;
     const d = parseInt(day, 10);
@@ -68,16 +60,17 @@ export default function HumanReadableConverter() {
     try {
       let dateInstance: Date;
 
-      if (timezone === "GMT") {
+      if (selectedTimeZone === "UTC") {
         dateInstance = new Date(Date.UTC(y, m, d, h, min, s, ms));
       } else {
-        const localDate = new Date(y, m, d, h, min, s, ms);
-        const utcDateStr = formatInTimeZone(
-          localDate,
-          "UTC",
-          "yyyy-MM-dd HH:mm:ss.SSS 'UTC'"
+        const localDateStr = formatInTimeZone(
+          new Date(y, m, d, h, min, s, ms),
+          selectedTimeZone,
+          "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
         );
-        dateInstance = new Date(utcDateStr);
+        console.log(localDateStr);
+        dateInstance = new Date(localDateStr);
+        console.log(dateInstance);
       }
 
       setDate(dateInstance);
@@ -93,86 +86,78 @@ export default function HumanReadableConverter() {
       </h2>
 
       <div className="flex items-end gap-2 flex-wrap">
-        <div className="flex flex-col items-center">
-          <small>Yr</small>
-          <input
-            className="input input-bordered w-16 text-center"
-            type="number"
-            value={year}
-            onChange={handleInputChange(setYear, 4)}
-          />
-        </div>
-        <span>-</span>
-        <div className="flex flex-col items-center">
-          <small>Mon</small>
-          <input
-            className="input input-bordered w-12 text-center"
-            type="number"
-            value={month}
-            onChange={handleInputChange(setMonth, 2, 12)}
-          />
-        </div>
-        <span>-</span>
-        <div className="flex flex-col items-center">
-          <small>Day</small>
-          <input
-            className="input input-bordered w-12 text-center"
-            type="number"
-            value={day}
-            onChange={handleInputChange(setDay, 2, 31)}
-          />
-        </div>
-        <span>&nbsp;</span>
-        <div className="flex flex-col items-center">
-          <small>Hr</small>
-          <input
-            className="input input-bordered w-12 text-center"
-            type="number"
-            value={hour}
-            onChange={handleInputChange(setHour, 2, 23)}
-          />
-        </div>
-        <span>:</span>
-        <div className="flex flex-col items-center">
-          <small>Min</small>
-          <input
-            className="input input-bordered w-12 text-center"
-            type="number"
-            value={minute}
-            onChange={handleInputChange(setMinute, 2, 59)}
-          />
-        </div>
-        <span>:</span>
-        <div className="flex flex-col items-center">
-          <small>Sec</small>
-          <input
-            className="input input-bordered w-12 text-center"
-            type="number"
-            value={second}
-            onChange={handleInputChange(setSecond, 2, 59)}
-          />
-        </div>
-        <span>.</span>
-        <div className="flex flex-col items-center">
-          <small>Ms</small>
-          <input
-            className="input input-bordered w-14 text-center"
-            type="number"
-            value={millisecond}
-            onChange={handleInputChange(setMillisecond, 3, 999)}
-          />
-        </div>
+        {[
+          { label: "Yr", key: "year", maxDigits: 4, width: "w-16" },
+          {
+            label: "Mon",
+            key: "month",
+            maxDigits: 2,
+            maxValue: 12,
+            width: "w-12",
+          },
+          {
+            label: "Day",
+            key: "day",
+            maxDigits: 2,
+            maxValue: 31,
+            width: "w-12",
+          },
+          {
+            label: "Hr",
+            key: "hour",
+            maxDigits: 2,
+            maxValue: 23,
+            width: "w-12",
+          },
+          {
+            label: "Min",
+            key: "minute",
+            maxDigits: 2,
+            maxValue: 59,
+            width: "w-12",
+          },
+          {
+            label: "Sec",
+            key: "second",
+            maxDigits: 2,
+            maxValue: 59,
+            width: "w-12",
+          },
+          {
+            label: "Ms",
+            key: "millisecond",
+            maxDigits: 3,
+            maxValue: 999,
+            width: "w-14",
+          },
+        ].map(({ label, key, maxDigits, maxValue, width }) => (
+          <div key={key} className="flex flex-col items-center">
+            <small>{label}</small>
+            <input
+              className={`input input-bordered text-center ${width}`}
+              type="number"
+              value={datetime[key as keyof typeof datetime]}
+              onChange={handleInputChange(
+                key as keyof typeof datetime,
+                maxDigits,
+                maxValue
+              )}
+            />
+          </div>
+        ))}
+
         <div className="flex flex-col items-center">
           <small>Zone</small>
           <select
-            className="input input-bordered w-20"
-            value={timezone}
-            onChange={(e) => setTimezone(e.target.value)}
+            className="input input-bordered w-24"
+            value={selectedTimeZone}
+            onChange={(e) => setSelectedTimeZone(e.target.value)}
           >
-            <option value="GMT">GMT</option>
-            <option value="local">Local</option>
+            <option value="UTC">UTC</option>
+            <option value={timeZone}>{timeZone}</option>
           </select>
         </div>
+
         <div className="flex flex-col items-center">
           <small>&nbsp;</small>
           <button className="btn btn-accent w-24 h-10" onClick={convertToEpoch}>

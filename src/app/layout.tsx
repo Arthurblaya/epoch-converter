@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "next-themes";
+import { TimeZoneProvider } from "@/context/timeZoneContext";
 
 export const metadata: Metadata = {
   title: "Epoch Converter",
@@ -25,10 +26,12 @@ export default function RootLayout({
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider defaultTheme="light">
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <div className="flex-1">{children}</div>
-          </div>
+          <TimeZoneProvider>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <div className="flex-1">{children}</div>
+            </div>
+          </TimeZoneProvider>
         </ThemeProvider>
       </body>
     </html>

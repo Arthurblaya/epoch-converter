@@ -13,7 +13,12 @@ export default function ThemeChanger() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted)
+    return (
+      <label>
+        <SunIcon className="size-7" />
+      </label>
+    );
 
   const isDarkMode = theme === "dark";
 

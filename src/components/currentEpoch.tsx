@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { formatInTimeZone } from "date-fns-tz";
 import ClipboardIcon from "@/icons/clipBoardIcon";
+import { useTimeZone } from "@/context/timeZoneContext";
 
 export default function CurrentEpoch() {
+  const { timeZone } = useTimeZone();
   const [epochData, setEpochData] = useState({
     epoch: 0,
+    localTime: "Loading...",
     utcTime: "Loading...",
   });
 
@@ -16,18 +20,16 @@ export default function CurrentEpoch() {
       const now = new Date();
       setEpochData({
         epoch: Math.floor(now.getTime() / 1000),
-        utcTime:
-          now.toLocaleString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            timeZone: "UTC",
-            hour12: false,
-          }) + " UTC",
+        utcTime: formatInTimeZone(
+          now,
+          "UTC",
+          "EEEE, MMMM d, yyyy HH:mm:ss XXX"
+        ),
+        localTime: formatInTimeZone(
+          now,
+          timeZone,
+          "EEEE, MMMM d, yyyy HH:mm:ss XXX"
+        ),
       });
 
       requestRef.current = requestAnimationFrame(updateTime);
@@ -38,7 +40,7 @@ export default function CurrentEpoch() {
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, []);
+  }, [timeZone]);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -53,20 +55,31 @@ export default function CurrentEpoch() {
         <span className="font-bold">{epochData.epoch || "Loading..."}</span>
         <button
           onClick={() => copyToClipboard(epochData.epoch.toString())}
-          className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
+          className="text-neutral hover:text-primary focus:text-primary transition-colors duration-400 cursor-pointer"
         >
           <ClipboardIcon className="size-5" />
         </button>
       </div>
 
-      <div className="flex items-center gap-2 text-sm">
-        <span>{epochData.utcTime || "Loading..."}</span>
-        <button
-          onClick={() => copyToClipboard(epochData.utcTime)}
-          className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
-        >
-          <ClipboardIcon className="size-5" />
-        </button>
+      <div className="flex flex-col gap-1 text-sm">
+        <div className="flex items-center gap-2">
+          <span>{epochData.utcTime || "Loading..."}</span>
+          <button
+            onClick={() => copyToClipboard(epochData.utcTime)}
+            className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
+          >
+            <ClipboardIcon className="size-5" />
+          </button>
+        </div>
+        <div className="flex items-center gap-2">
+          <span>{epochData.localTime || "Loading..."}</span>
+          <button
+            onClick={() => copyToClipboard(epochData.localTime)}
+            className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
+          >
+            <ClipboardIcon className="size-5" />
+          </button>
+        </div>
       </div>
     </div>
   );

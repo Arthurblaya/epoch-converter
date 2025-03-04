@@ -2,12 +2,15 @@ import { formatDistanceToNow } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { enUS } from "date-fns/locale";
 import ClipboardIcon from "@/icons/clipBoardIcon";
+import { useTimeZone } from "@/context/timeZoneContext";
 
 interface DateFormatterProps {
   date: Date;
 }
 
 export default function DateFormatter({ date }: DateFormatterProps) {
+  const { timeZone } = useTimeZone();
+
   if (isNaN(date.getTime())) return <p className="text-error">Invalid Date</p>;
 
   const epochSeconds = Math.floor(date.getTime() / 1000);
@@ -17,16 +20,13 @@ export default function DateFormatter({ date }: DateFormatterProps) {
   const formattedUTC = formatInTimeZone(
     date,
     "UTC",
-    "EEEE, d MMMM yyyy HH:mm:ss 'UTC'",
-    { locale: enUS }
+    "EEEE, MMMM d, yyyy HH:mm:ss XXX"
   );
 
-  const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const formattedLocal = formatInTimeZone(
     date,
-    localTimeZone,
-    "EEEE, d MMMM yyyy HH:mm:ss zzz",
-    { locale: enUS }
+    timeZone,
+    "EEEE, MMMM d, yyyy HH:mm:ss XXX"
   );
 
   const relativeTime = formatDistanceToNow(date, {
@@ -58,7 +58,7 @@ export default function DateFormatter({ date }: DateFormatterProps) {
 
         <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
-            <strong>Local Time:</strong> {formattedLocal}
+            <strong>Selected TimeZone:</strong> {formattedLocal}
           </span>
           <button
             onClick={() => copyToClipboard(formattedLocal)}
