@@ -56,17 +56,19 @@ export default function DateFormatter({ date }: DateFormatterProps) {
           </button>
         </div>
 
-        <div className="flex items-center flex-wrap gap-2">
-          <span className="whitespace-nowrap min-w-0 truncate">
-            <strong>Selected TimeZone:</strong> {formattedLocal}
-          </span>
-          <button
-            onClick={() => copyToClipboard(formattedLocal)}
-            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
-          >
-            <ClipboardIcon className="size-4" />
-          </button>
-        </div>
+        {timeZone && timeZone !== "UTC" && timeZone !== "Etc/GMT+0" && (
+          <div className="flex items-center flex-wrap gap-2">
+            <span className="whitespace-nowrap min-w-0 truncate">
+              <strong>Selected TimeZone:</strong> {formattedLocal}
+            </span>
+            <button
+              onClick={() => copyToClipboard(formattedLocal)}
+              className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
+            >
+              <ClipboardIcon className="size-4" />
+            </button>
+          </div>
+        )}
 
         <p>
           <strong>Relative:</strong> {relativeTime}
