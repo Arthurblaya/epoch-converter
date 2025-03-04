@@ -71,15 +71,18 @@ export default function CurrentEpoch() {
             <ClipboardIcon className="size-5" />
           </button>
         </div>
-        <div className="flex items-center gap-2">
-          <span>{epochData.localTime || "Loading..."}</span>
-          <button
-            onClick={() => copyToClipboard(epochData.localTime)}
-            className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
-          >
-            <ClipboardIcon className="size-5" />
-          </button>
-        </div>
+
+        {timeZone && timeZone !== "UTC" && timeZone !== "Etc/GMT+0" && (
+          <div className="flex items-center gap-2">
+            <span>{epochData.localTime || "Loading..."}</span>
+            <button
+              onClick={() => copyToClipboard(epochData.localTime)}
+              className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
+            >
+              <ClipboardIcon className="size-5" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
