@@ -27,7 +27,7 @@ function TimeZoneSelector({ className }: { className?: string }) {
     <select
       value={timeZone}
       onChange={(e) => setTimeZone(e.target.value)}
-      className="select w-25"
+      className={className + " select w-25"}
     >
       {timeZones.map((tz) => (
         <option key={tz} value={tz}>

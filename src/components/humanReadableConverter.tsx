@@ -35,7 +35,7 @@ export default function HumanReadableConverter() {
   const handleInputChange =
     (key: keyof typeof datetime, maxDigits: number, maxValue?: number) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      let value = e.target.value.replace(/\D/g, "").slice(0, maxDigits);
+      const value = e.target.value.replace(/\D/g, "").slice(0, maxDigits);
       if (maxValue !== undefined && parseInt(value, 10) > maxValue) return;
       setDatetime((prev) => ({ ...prev, [key]: value }));
     };
