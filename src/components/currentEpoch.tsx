@@ -4,9 +4,10 @@ import { useEffect, useState, useRef } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTimeZone } from "@/context/timeZoneContext";
 import CopyButton from "./copyButton";
-import { DATE_FORMAT_HUMAN_READABLE_ENGLISH } from "@/formattedDates/formatedDates";
+import { useDateFormat } from "@/context/dateFormatContext";
 
 export default function CurrentEpoch() {
+  const { dateFormat } = useDateFormat();
   const { timeZone } = useTimeZone();
   const [epochData, setEpochData] = useState({
     epoch: 0,
@@ -21,16 +22,8 @@ export default function CurrentEpoch() {
       const now = new Date();
       setEpochData({
         epoch: Math.floor(now.getTime() / 1000),
-        utcTime: formatInTimeZone(
-          now,
-          "UTC",
-          DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
-        ),
-        localTime: formatInTimeZone(
-          now,
-          timeZone,
-          DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
-        ),
+        utcTime: formatInTimeZone(now, "UTC", dateFormat),
+        localTime: formatInTimeZone(now, timeZone, dateFormat),
       });
 
       requestRef.current = requestAnimationFrame(updateTime);
@@ -41,7 +34,7 @@ export default function CurrentEpoch() {
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [timeZone]);
+  }, [timeZone, dateFormat]);
 
   return (
     <div className="flex flex-col gap-1 text-lg">

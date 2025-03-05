@@ -4,6 +4,7 @@ import { enUS } from "date-fns/locale";
 import { useTimeZone } from "@/context/timeZoneContext";
 import CopyButton from "./copyButton";
 import { DATE_FORMAT_HUMAN_READABLE_ENGLISH } from "@/formattedDates/formatedDates";
+import { useDateFormat } from "@/context/dateFormatContext";
 
 interface DateFormatterProps {
   date: Date;
@@ -11,6 +12,7 @@ interface DateFormatterProps {
 
 export default function DateFormatter({ date }: DateFormatterProps) {
   const { timeZone } = useTimeZone();
+  const { dateFormat } = useDateFormat();
 
   if (isNaN(date.getTime())) return <p className="text-error">Invalid Date</p>;
 
@@ -18,17 +20,9 @@ export default function DateFormatter({ date }: DateFormatterProps) {
   const epochMilliseconds = date.getTime();
   const epochMicroseconds = date.getTime() * 1_000;
 
-  const formattedUTC = formatInTimeZone(
-    date,
-    "UTC",
-    DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
-  );
+  const formattedUTC = formatInTimeZone(date, "UTC", dateFormat);
 
-  const formattedLocal = formatInTimeZone(
-    date,
-    timeZone,
-    DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
-  );
+  const formattedLocal = formatInTimeZone(date, timeZone, dateFormat);
 
   const relativeTime = formatDistanceToNow(date, {
     locale: enUS,

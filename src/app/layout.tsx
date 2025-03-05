@@ -4,6 +4,8 @@ import Header from "@/components/header";
 import { ThemeProvider } from "next-themes";
 import { TimeZoneProvider } from "@/context/timeZoneContext";
 import Sidebar from "@/components/sideBar";
+import { DateFormatProvider } from "@/context/dateFormatContext";
+import DateFormatSelector from "@/components/dateFormatSelector";
 
 export const metadata: Metadata = {
   title: {
@@ -31,20 +33,18 @@ export default function RootLayout({
       <body className="antialiased overflow-x-hidden">
         <ThemeProvider defaultTheme="light">
           <TimeZoneProvider>
-            <div className="flex min-h-screen">
-              <div className="flex-1 flex flex-col w-full min-w-0">
-                <Header />
-                <main className="flex-1 w-full">{children}</main>
+            <DateFormatProvider>
+              <div className="flex min-h-screen">
+                <div className="flex-1 flex flex-col w-full min-w-0">
+                  <Header />
+                  <main className="flex-1 w-full">{children}</main>
+                </div>
+                <Sidebar>
+                  
+                  <DateFormatSelector />
+                </Sidebar>
               </div>
-              <Sidebar>
-                <li>
-                  <a>Sidebar Item 1</a>
-                </li>
-                <li>
-                  <a>Sidebar Item 2</a>
-                </li>
-              </Sidebar>
-            </div>
+            </DateFormatProvider>
           </TimeZoneProvider>
         </ThemeProvider>
       </body>
