@@ -3,6 +3,11 @@ import DocsProgrammingWithEpoch from "@/components/docsProgrammingWithEpoch";
 import WhatIsEpoch from "@/components/whatIsEpoch";
 import { consoleFont } from "@/fonts/inconsolata";
 import DocsConvertHumanDateToEpoch from "@/components/docsConvertHumanDateToEpoch";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home - Epoch Converter",
+};
 
 export default function Home() {
   return (

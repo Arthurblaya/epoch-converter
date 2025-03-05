@@ -5,7 +5,10 @@ import { ThemeProvider } from "next-themes";
 import { TimeZoneProvider } from "@/context/timeZoneContext";
 
 export const metadata: Metadata = {
-  title: "Epoch Converter",
+  title: {
+    default: "Epoch Converter",
+    template: "%s - Epoch Converter",
+  },
   description:
     "Convert Unix timestamps to human-readable dates with timezone support.",
 };
