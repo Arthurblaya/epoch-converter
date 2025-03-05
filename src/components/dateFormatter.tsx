@@ -3,6 +3,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import { enUS } from "date-fns/locale";
 import { useTimeZone } from "@/context/timeZoneContext";
 import CopyButton from "./copyButton";
+import { DATE_FORMAT_HUMAN_READABLE_ENGLISH } from "@/formattedDates/formatedDates";
 
 interface DateFormatterProps {
   date: Date;
@@ -20,23 +21,19 @@ export default function DateFormatter({ date }: DateFormatterProps) {
   const formattedUTC = formatInTimeZone(
     date,
     "UTC",
-    "EEEE, MMMM d, yyyy HH:mm:ss XXX"
+    DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
   );
 
   const formattedLocal = formatInTimeZone(
     date,
     timeZone,
-    "EEEE, MMMM d, yyyy HH:mm:ss XXX"
+    DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
   );
 
   const relativeTime = formatDistanceToNow(date, {
     locale: enUS,
     addSuffix: true,
   });
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
 
   return (
     <div className="mt-4 flex flex-col sm:flex-row sm:gap-12 gap-8">

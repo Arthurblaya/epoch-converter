@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTimeZone } from "@/context/timeZoneContext";
 import CopyButton from "./copyButton";
+import { DATE_FORMAT_HUMAN_READABLE_ENGLISH } from "@/formattedDates/formatedDates";
 
 export default function CurrentEpoch() {
   const { timeZone } = useTimeZone();
@@ -23,12 +24,12 @@ export default function CurrentEpoch() {
         utcTime: formatInTimeZone(
           now,
           "UTC",
-          "EEEE, MMMM d, yyyy HH:mm:ss XXX"
+          DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
         ),
         localTime: formatInTimeZone(
           now,
           timeZone,
-          "EEEE, MMMM d, yyyy HH:mm:ss XXX"
+          DATE_FORMAT_HUMAN_READABLE_ENGLISH.format
         ),
       });
 
