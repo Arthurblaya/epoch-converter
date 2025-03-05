@@ -3,7 +3,6 @@ import { formatInTimeZone } from "date-fns-tz";
 import { enUS } from "date-fns/locale";
 import { useTimeZone } from "@/context/timeZoneContext";
 import CopyButton from "./copyButton";
-import { DATE_FORMAT_HUMAN_READABLE_ENGLISH } from "@/formattedDates/formatedDates";
 import { useDateFormat } from "@/context/dateFormatContext";
 
 interface DateFormatterProps {
