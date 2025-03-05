@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import MoonIcon from "@/icons/moonIcon";
 import SunIcon from "@/icons/sunIcon";
 
-export default function ThemeChanger() {
+export default function ThemeChanger({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -23,7 +23,7 @@ export default function ThemeChanger() {
   const isDarkMode = theme === "dark";
 
   return (
-    <label className="swap swap-rotate cursor-pointer">
+    <label className={"btn swap swap-rotate cursor-pointer " + className}>
       <input
         type="checkbox"
         className="hidden"

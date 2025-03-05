@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "next-themes";
 import { TimeZoneProvider } from "@/context/timeZoneContext";
+import Sidebar from "@/components/sideBar";
 
 export const metadata: Metadata = {
   title: {
@@ -27,12 +28,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="antialiased overflow-x-hidden">
         <ThemeProvider defaultTheme="light">
           <TimeZoneProvider>
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <div className="flex-1">{children}</div>
+            <div className="flex min-h-screen">
+              <div className="flex-1 flex flex-col w-full min-w-0">
+                <Header />
+                <main className="flex-1 w-full">{children}</main>
+              </div>
+              <Sidebar>
+                <li>
+                  <a>Sidebar Item 1</a>
+                </li>
+                <li>
+                  <a>Sidebar Item 2</a>
+                </li>
+              </Sidebar>
             </div>
           </TimeZoneProvider>
         </ThemeProvider>
