@@ -1,8 +1,8 @@
 import { formatDistanceToNow } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { enUS } from "date-fns/locale";
-import ClipboardIcon from "@/icons/clipBoardIcon";
 import { useTimeZone } from "@/context/timeZoneContext";
+import CopyButton from "./copyButton";
 
 interface DateFormatterProps {
   date: Date;
@@ -48,12 +48,7 @@ export default function DateFormatter({ date }: DateFormatterProps) {
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>GMT/UTC:</strong> {formattedUTC}
           </span>
-          <button
-            onClick={() => copyToClipboard(formattedUTC)}
-            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
-          >
-            <ClipboardIcon className="size-4" />
-          </button>
+          <CopyButton text={formattedUTC} size="size-4" />
         </div>
 
         {timeZone && timeZone !== "UTC" && timeZone !== "Etc/GMT+0" && (
@@ -61,12 +56,7 @@ export default function DateFormatter({ date }: DateFormatterProps) {
             <span className="whitespace-nowrap min-w-0 truncate">
               <strong>Selected TimeZone:</strong> {formattedLocal}
             </span>
-            <button
-              onClick={() => copyToClipboard(formattedLocal)}
-              className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
-            >
-              <ClipboardIcon className="size-4" />
-            </button>
+            <CopyButton text={formattedLocal} size="size-4" />
           </div>
         )}
 
@@ -83,36 +73,21 @@ export default function DateFormatter({ date }: DateFormatterProps) {
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>Seconds:</strong> {epochSeconds}
           </span>
-          <button
-            onClick={() => copyToClipboard(epochSeconds.toString())}
-            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
-          >
-            <ClipboardIcon className="size-4" />
-          </button>
+          <CopyButton text={epochSeconds.toString()} size="size-4" />
         </div>
 
         <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>Milliseconds:</strong> {epochMilliseconds}
           </span>
-          <button
-            onClick={() => copyToClipboard(epochMilliseconds.toString())}
-            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
-          >
-            <ClipboardIcon className="size-4" />
-          </button>
+          <CopyButton text={epochMilliseconds.toString()} size="size-4" />
         </div>
 
         <div className="flex items-center flex-wrap gap-2">
           <span className="whitespace-nowrap min-w-0 truncate">
             <strong>Microseconds:</strong> {epochMicroseconds}
           </span>
-          <button
-            onClick={() => copyToClipboard(epochMicroseconds.toString())}
-            className="shrink-0 text-neutral hover:text-primary transition-colors duration-400 cursor-pointer"
-          >
-            <ClipboardIcon className="size-4" />
-          </button>
+          <CopyButton text={epochMicroseconds.toString()} size="size-4" />
         </div>
       </div>
     </div>

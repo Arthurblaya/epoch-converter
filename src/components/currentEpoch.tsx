@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import { formatInTimeZone } from "date-fns-tz";
-import ClipboardIcon from "@/icons/clipBoardIcon";
 import { useTimeZone } from "@/context/timeZoneContext";
+import CopyButton from "./copyButton";
 
 export default function CurrentEpoch() {
   const { timeZone } = useTimeZone();
@@ -42,10 +42,6 @@ export default function CurrentEpoch() {
     };
   }, [timeZone]);
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
-
   return (
     <div className="flex flex-col gap-1 text-lg">
       <div className="flex items-center gap-2">
@@ -53,34 +49,20 @@ export default function CurrentEpoch() {
           The current <span className="text-secondary">Unix epoch time</span> is
         </span>
         <span className="font-bold">{epochData.epoch || "Loading..."}</span>
-        <button
-          onClick={() => copyToClipboard(epochData.epoch.toString())}
-          className="text-neutral hover:text-primary focus:text-primary transition-colors duration-400 cursor-pointer"
-        >
-          <ClipboardIcon className="size-5" />
-        </button>
+
+        <CopyButton text={epochData.epoch.toString()} size="size-5" />
       </div>
 
       <div className="flex flex-col gap-1 text-sm">
         <div className="flex items-center gap-2">
           <span>{epochData.utcTime || "Loading..."}</span>
-          <button
-            onClick={() => copyToClipboard(epochData.utcTime)}
-            className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
-          >
-            <ClipboardIcon className="size-5" />
-          </button>
+          <CopyButton text={epochData.utcTime} size="size-5" />
         </div>
 
         {timeZone && timeZone !== "UTC" && timeZone !== "Etc/GMT+0" && (
           <div className="flex items-center gap-2">
             <span>{epochData.localTime || "Loading..."}</span>
-            <button
-              onClick={() => copyToClipboard(epochData.localTime)}
-              className="text-neutral hover:text-primary focus:text-primary transition-colors duration- cursor-pointer"
-            >
-              <ClipboardIcon className="size-5" />
-            </button>
+            <CopyButton text={epochData.localTime} size="size-5" />
           </div>
         )}
       </div>
