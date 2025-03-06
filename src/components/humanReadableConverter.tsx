@@ -153,7 +153,7 @@ export default function HumanReadableConverter() {
             onChange={(e) => setSelectedTimeZone(e.target.value)}
           >
             <option value="UTC">UTC</option>
-            <option value={timeZone}>{timeZone}</option>
+            {timeZone !== "UTC" && <option value={timeZone}>{timeZone}</option>}
           </select>
         </div>
 
