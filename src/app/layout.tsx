@@ -9,8 +9,8 @@ import DateFormatSelector from "@/components/dateFormatSelector";
 
 export const metadata: Metadata = {
   title: {
-    default: "Epoch Converter",
-    template: "%s - Epoch Converter",
+    default: "Timestamp Converter",
+    template: "%s - Timestamp Converter",
   },
   description:
     "Convert Unix timestamps to human-readable dates with timezone support.",
@@ -40,7 +40,6 @@ export default function RootLayout({
                   <main className="flex-1 w-full">{children}</main>
                 </div>
                 <Sidebar>
-                  
                   <DateFormatSelector />
                 </Sidebar>
               </div>

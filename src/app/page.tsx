@@ -6,7 +6,7 @@ import DocsConvertHumanDateToEpoch from "@/components/docsConvertHumanDateToEpoc
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home - Epoch Converter",
+  title: "Home - Timestamp Converter",
 };
 
 export default function Home() {
