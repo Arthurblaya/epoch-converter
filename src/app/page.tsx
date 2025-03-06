@@ -14,7 +14,7 @@ export default function Home() {
     <div className="p-4">
       <div className="min-h-screen container mx-auto flex flex-col max-w-screen-xl gap-4">
         <h1 className={`${consoleFont.className} text-primary text-3xl`}>
-          Epoch & Unix Time Conversion Utilities
+          Epoch & Unix Timestamp Conversion Utilities
         </h1>
         <DynamicConverters />
         <WhatIsEpoch />

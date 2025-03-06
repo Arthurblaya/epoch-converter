@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { parseISO } from "date-fns";
 import DateFormatter from "./dateFormatter";
 import { formatInTimeZone } from "date-fns-tz";
-import { DATE_FORMAT_ISO_8601 } from "@/formattedDates/formatedDates";
+import { DATE_FORMAT_ISO_8601 } from "@/utils/formattedDates/formatedDates";
 
 export default function HumanReadableConverterString() {
   const [inputValue, setInputValue] = useState("");

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import DateFormatter from "./dateFormatter";
 import { useTimeZone } from "@/context/timeZoneContext";
-import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/formattedDates/formatedDates";
+import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formattedDates/formatedDates";
 
 export default function HumanReadableConverter() {
   const { timeZone } = useTimeZone();
