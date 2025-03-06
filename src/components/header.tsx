@@ -20,7 +20,7 @@ export default function Header() {
           <h1
             className={`${consoleFont.className} pl-1 sm:pl-0 text-sm sm:text-xl font-bold`}
           >
-            <span className="text-primary">Epoch</span>{" "}
+            <span className="text-primary">Timestamp</span>{" "}
             <span className="">Converter</span>
           </h1>
         </div>

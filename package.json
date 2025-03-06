@@ -1,5 +1,5 @@
 {
-  "name": "epoch-converter",
+  "name": "timestamp-converter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
