@@ -53,7 +53,7 @@ export default function HumanReadableConverterString() {
         Convert Date Format into a Readable Timestamp
       </h2>
 
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex gap-2">
         <input
           type="text"
           className="input input-bordered"

@@ -2,6 +2,7 @@ import { consoleFont } from "@/fonts/inconsolata";
 import ClockIcon from "@/icons/clockIcon";
 import ThemeChanger from "./themeChanger";
 import TimeZoneSelector from "./timeZoneSelector";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -15,7 +16,7 @@ export default function Header() {
       </label>
 
       <div className="container mx-auto flex max-w-screen-xl items-center justify-between">
-        <div className="flex items-center gap-2 cursor-pointer">
+        <Link href="/" className="flex items-center gap-2 cursor-pointer">
           <ClockIcon className="size-7 text-primary" />
           <h1
             className={`${consoleFont.className} pl-1 sm:pl-0 text-sm sm:text-xl font-bold`}
@@ -23,11 +24,11 @@ export default function Header() {
             <span className="text-primary">Timestamp</span>{" "}
             <span className="">Converter</span>
           </h1>
-        </div>
+        </Link>
 
-        <nav className="flex gap-4 items-center ml-auto">
+        <nav className="flex gap-2 items-center ml-auto">
           <TimeZoneSelector />
-          <ThemeChanger className="mr-4" />
+          <ThemeChanger className="lg:mr-0 mr-2" />
         </nav>
       </div>
     </header>
