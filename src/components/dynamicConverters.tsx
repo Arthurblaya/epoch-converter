@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import CurrentEpoch from "./currentEpoch";
 import HumanReadableConverterString from "./humanReadableConverterString";
+import LogConverter from "./LogConverter";
 
 const EpochConverter = dynamic(() => import("@/components/epochConverter"), {
   ssr: false,
@@ -20,6 +21,7 @@ export default function DynamicConverters() {
       <EpochConverter />
       <HumanReadableConverter />
       <HumanReadableConverterString />
+      <LogConverter />
     </>
   );
 }
