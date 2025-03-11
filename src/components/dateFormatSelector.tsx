@@ -8,7 +8,7 @@ import {
   DATE_FORMAT_ISO_8601_MILLISECONDS,
   DATE_FORMAT_RFC_2822,
   DATE_FORMAT_RFC_3339,
-} from "@/utils/formattedDates/formatedDates";
+} from "@/utils/formatedDates";
 
 const dateFormats = [
   DATE_FORMAT_ISO_8601,

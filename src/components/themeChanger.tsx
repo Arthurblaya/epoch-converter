@@ -2,8 +2,8 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import MoonIcon from "@/icons/moonIcon";
-import SunIcon from "@/icons/sunIcon";
+import MoonIcon from "@/lib/icons/moonIcon";
+import SunIcon from "@/lib/icons/sunIcon";
 
 export default function ThemeChanger({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme();

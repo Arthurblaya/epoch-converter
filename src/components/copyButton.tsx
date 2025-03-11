@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ClipboardIcon from "@/icons/clipBoardIcon";
-import ClipBoardCheckIcon from "@/icons/clipBoardChecIcon";
+import ClipboardIcon from "@/lib/icons/clipBoardIcon";
+import ClipBoardCheckIcon from "@/lib/icons/clipBoardChecIcon";
 
 interface CopyButtonProps {
   text: string;

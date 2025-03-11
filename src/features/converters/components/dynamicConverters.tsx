@@ -1,17 +1,17 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import CurrentEpoch from "./currentEpoch";
+import CurrentEpoch from "../../../components/currentEpoch";
 import HumanReadableConverterString from "./humanReadableConverterString";
 import LogConverter from "./logConverter";
 import SpreadSheetConverter from "./spreadSheetConverter";
 
-const EpochConverter = dynamic(() => import("@/components/epochConverter"), {
+const EpochConverter = dynamic(() => import("@/features/converters/components/epochConverter"), {
   ssr: false,
 });
 
 const HumanReadableConverter = dynamic(
-  () => import("@/components/humanReadableConverter"),
+  () => import("@/features/converters/components/humanReadableConverter"),
   { ssr: false }
 );
 

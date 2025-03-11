@@ -1,6 +1,6 @@
 "use client";
 
-import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formattedDates/formatedDates";
+import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formatedDates";
 import { createContext, useContext, useState, ReactNode } from "react";
 
 export interface DateFormatContextType {

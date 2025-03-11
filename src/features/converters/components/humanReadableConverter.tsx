@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { formatInTimeZone } from "date-fns-tz";
-import DateFormatter from "./dateFormatter";
+
 import { useTimeZone } from "@/context/timeZoneContext";
-import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formattedDates/formatedDates";
+import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formatedDates";
+import DateFormatter from "@/features/dateFormatting/components/dateFormatter";
 
 export default function HumanReadableConverter() {
   const { timeZone } = useTimeZone();
@@ -79,11 +80,7 @@ export default function HumanReadableConverter() {
   };
 
   return (
-    <div className="mt-8 flex flex-col gap-4">
-      <h2 className="text-secondary text-2xl">
-        Convert Human Date to Timestamp
-      </h2>
-
+    <div className="flex flex-col gap-4">
       <div className="flex items-end gap-2 flex-wrap">
         {[
           { label: "Yr", key: "year", maxDigits: 4, width: "w-16" },

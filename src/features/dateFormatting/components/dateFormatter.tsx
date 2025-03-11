@@ -2,8 +2,8 @@ import { formatDistanceToNow } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { enUS } from "date-fns/locale";
 import { useTimeZone } from "@/context/timeZoneContext";
-import CopyButton from "./copyButton";
 import { useDateFormat } from "@/context/dateFormatContext";
+import CopyButton from "@/components/copyButton";
 
 interface DateFormatterProps {
   date: Date;

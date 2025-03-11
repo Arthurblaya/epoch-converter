@@ -1,5 +1,5 @@
-import { consoleFont } from "@/fonts/inconsolata";
-import ClockIcon from "@/icons/clockIcon";
+import { consoleFont } from "@/lib/fonts/inconsolata";
+import ClockIcon from "@/lib/icons/clockIcon";
 import ThemeChanger from "./themeChanger";
 import TimeZoneSelector from "./timeZoneSelector";
 import Link from "next/link";

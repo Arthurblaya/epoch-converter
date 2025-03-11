@@ -43,9 +43,7 @@ export default function LogConverter() {
   };
 
   return (
-    <div className="mt-8 flex flex-col gap-4">
-      <h2 className="text-secondary text-2xl">Convert Logs with Timestamps</h2>
-      <p>Paste logs to convert timestamps into readable dates.</p>
+    <div className="flex flex-col gap-4">
       <textarea
         className="textarea textarea-bordered bg-neutral-900 text-neutral-content w-full"
         placeholder="Paste logs here..."

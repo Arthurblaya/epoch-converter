@@ -1,6 +1,6 @@
 "use client";
+import DateFormatter from "@/features/dateFormatting/components/dateFormatter";
 import { useState, useCallback } from "react";
-import DateFormatter from "./dateFormatter";
 
 export default function EpochConverter() {
   const [epochInput, setEpochInput] = useState(() =>
@@ -41,11 +41,7 @@ export default function EpochConverter() {
   }, [epochInput]);
 
   return (
-    <div className="mt-8 flex flex-col gap-4">
-      <h2 className="text-secondary text-2xl">
-        Convert Epoch to Readable Date
-      </h2>
-
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <input
