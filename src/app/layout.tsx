@@ -6,6 +6,7 @@ import { TimeZoneProvider } from "@/context/timeZoneContext";
 import Sidebar from "@/components/sideBar";
 import { DateFormatProvider } from "@/context/dateFormatContext";
 import DateFormatSelector from "@/components/dateFormatSelector";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -38,6 +39,7 @@ export default function RootLayout({
                 <div className="flex-1 flex flex-col w-full min-w-0">
                   <Header />
                   <main className="flex-1 w-full">{children}</main>
+                  <Footer />
                 </div>
                 <Sidebar>
                   <DateFormatSelector />
