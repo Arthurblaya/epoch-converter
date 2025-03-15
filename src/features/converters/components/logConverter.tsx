@@ -1,46 +1,9 @@
 "use client";
-
-import { useState } from "react";
-import { formatInTimeZone } from "date-fns-tz";
-import { useTimeZone } from "@/context/timeZoneContext";
-import { useDateFormat } from "@/context/dateFormatContext";
+import { useLogConverter } from "@/features/converters/hooks/useLogConverter";
 
 export default function LogConverter() {
-  const { timeZone } = useTimeZone();
-  const { dateFormat } = useDateFormat();
-  const [logInput, setLogInput] = useState("");
-  const [convertedLog, setConvertedLog] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  const convertTimestamps = () => {
-    setError(null);
-    const timestampRegex = /\b\d{10,16}\b/g;
-
-    let foundEpoch = false;
-
-    const newLog = logInput.replace(timestampRegex, (match) => {
-      let epoch = Number(match);
-
-      if (epoch < 1e12) {
-        epoch *= 1000;
-      } else if (epoch > 1e15) {
-        epoch = Math.floor(epoch / 1000);
-      }
-
-      const date = new Date(epoch);
-      if (isNaN(date.getTime())) return match;
-
-      foundEpoch = true;
-      return formatInTimeZone(date, timeZone, dateFormat);
-    });
-
-    if (!foundEpoch) {
-      setError("No epoch timestamps detected.");
-      setConvertedLog("");
-    } else {
-      setConvertedLog(newLog);
-    }
-  };
+  const { logInput, setLogInput, convertedLog, error, convertTimestamps } =
+    useLogConverter();
 
   return (
     <div className="flex flex-col gap-4">
@@ -57,21 +20,13 @@ export default function LogConverter() {
       </button>
 
       {error && <p className="text-error text-center">{error}</p>}
-
       {convertedLog && (
-        <div className="flex flex-col gap-2">
-          <h3 className="text-lg text-secondary">Converted Logs:</h3>
-          <p>
-            You can select the time zone and date format from the sidebar and
-            navbar.
-          </p>
-          <textarea
-            className="textarea textarea-bordered bg-neutral-900 text-neutral-content w-full"
-            readOnly
-            value={convertedLog}
-            rows={Math.min(logInput.split("\n").length, 20)}
-          ></textarea>
-        </div>
+        <textarea
+          className="textarea textarea-bordered bg-neutral-900 text-neutral-content w-full"
+          readOnly
+          value={convertedLog}
+          rows={Math.min(logInput.split("\n").length, 20)}
+        ></textarea>
       )}
     </div>
   );

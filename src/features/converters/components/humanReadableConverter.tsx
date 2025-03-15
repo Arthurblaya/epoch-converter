@@ -1,38 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
-import { formatInTimeZone } from "date-fns-tz";
-
-import { useTimeZone } from "@/context/timeZoneContext";
-import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formatedDates";
-import DateFormatter from "@/features/dateFormatting/components/dateFormatter";
+import { useHumanReadableConverter } from "@/features/converters/hooks/useHumanReadableConverter";
+import DateFormatter from "./dateFormatter";
 
 export default function HumanReadableConverter() {
-  const { timeZone } = useTimeZone();
-  const [datetime, setDatetime] = useState({
-    year: "",
-    month: "",
-    day: "",
-    hour: "",
-    minute: "",
-    second: "",
-    millisecond: "",
-  });
-  const [selectedTimeZone, setSelectedTimeZone] = useState("UTC");
-  const [date, setDate] = useState<Date | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const now = new Date();
-    setDatetime({
-      year: now.getUTCFullYear().toString(),
-      month: (now.getUTCMonth() + 1).toString().padStart(2, "0"),
-      day: now.getUTCDate().toString().padStart(2, "0"),
-      hour: now.getUTCHours().toString().padStart(2, "0"),
-      minute: now.getUTCMinutes().toString().padStart(2, "0"),
-      second: now.getUTCSeconds().toString().padStart(2, "0"),
-      millisecond: now.getUTCMilliseconds().toString().padStart(3, "0"),
-    });
-  }, []);
+  const {
+    datetime,
+    setDatetime,
+    convertedDate,
+    error,
+    selectedTimeZone,
+    setSelectedTimeZone,
+    convertToEpoch,
+    timeZone,
+  } = useHumanReadableConverter();
 
   const handleInputChange =
     (key: keyof typeof datetime, maxDigits: number, maxValue?: number) =>
@@ -41,43 +21,6 @@ export default function HumanReadableConverter() {
       if (maxValue !== undefined && parseInt(value, 10) > maxValue) return;
       setDatetime((prev) => ({ ...prev, [key]: value }));
     };
-
-  const convertToEpoch = () => {
-    setError(null);
-
-    const { year, month, day, hour, minute, second, millisecond } = datetime;
-    const y = parseInt(year, 10);
-    const m = parseInt(month, 10) - 1;
-    const d = parseInt(day, 10);
-    const h = parseInt(hour, 10);
-    const min = parseInt(minute, 10);
-    const s = parseInt(second, 10);
-    const ms = parseInt(millisecond, 10) || 0;
-
-    if ([y, m, d, h, min, s, ms].some((v) => isNaN(v))) {
-      setError("Invalid input. Please enter valid numbers.");
-      return;
-    }
-
-    try {
-      let dateInstance: Date;
-
-      if (selectedTimeZone === "UTC") {
-        dateInstance = new Date(Date.UTC(y, m, d, h, min, s, ms));
-      } else {
-        const localDateStr = formatInTimeZone(
-          new Date(y, m, d, h, min, s, ms),
-          selectedTimeZone,
-          DATE_FORMAT_ISO_8601_MILLISECONDS.format
-        );
-        dateInstance = new Date(localDateStr);
-      }
-
-      setDate(dateInstance);
-    } catch {
-      setError("Error converting date. Check your inputs.");
-    }
-  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -132,7 +75,7 @@ export default function HumanReadableConverter() {
             <input
               className={`input input-bordered text-center ${width}`}
               type="number"
-              value={datetime[key as keyof typeof datetime]}
+              value={datetime[key as keyof typeof datetime] ?? ""}
               onChange={handleInputChange(
                 key as keyof typeof datetime,
                 maxDigits,
@@ -154,16 +97,13 @@ export default function HumanReadableConverter() {
           </select>
         </div>
 
-        <div className="flex flex-col items-center">
-          <small>&nbsp;</small>
-          <button className="btn btn-accent w-24 h-10" onClick={convertToEpoch}>
-            Convert
-          </button>
-        </div>
+        <button className="btn btn-accent w-24 h-10" onClick={convertToEpoch}>
+          Convert
+        </button>
       </div>
 
       {error && <p className="text-error text-center">{error}</p>}
-      {date && <DateFormatter date={date} />}
+      {convertedDate && <DateFormatter date={convertedDate} />}
     </div>
   );
 }

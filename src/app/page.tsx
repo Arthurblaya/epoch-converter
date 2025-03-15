@@ -1,8 +1,10 @@
-import DynamicConverters from "@/features/converters/components/dynamicConverters";
-import DocsProgrammingWithEpoch from "@/features/seo/components/programmingWithEpoch";
-import WhatIsEpoch from "@/features/seo/components/whatIsEpoch";
+import CurrentEpoch from "@/components/currentEpoch";
+import EpochConverter from "@/features/converters/components/epochConverter";
+import HumanReadableConverter from "@/features/converters/components/humanReadableConverter";
+import HumanReadableConverterString from "@/features/converters/components/humanReadableConverterString";
+import LogConverter from "@/features/converters/components/logConverter";
+import SpreadSheetConverter from "@/features/converters/components/spreadSheetConverter";
 import { consoleFont } from "@/lib/fonts/inconsolata";
-import DocsConvertHumanDateToEpoch from "@/features/seo/components/convertHumanDateToEpoch";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,6 +18,12 @@ export default function Home() {
         <h1 className={`${consoleFont.className} text-primary text-3xl`}>
           Epoch & Unix Timestamp Conversion Utilities
         </h1>
+        <CurrentEpoch />
+        <EpochConverter />
+        <HumanReadableConverter />
+        <HumanReadableConverterString />
+        <LogConverter />
+        <SpreadSheetConverter />
       </div>
     </div>
   );
