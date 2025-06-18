@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTimeZone } from "@/context/timeZoneContext";
-import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formatedDates";
+import { DATE_FORMAT_ISO_8601 } from "@/utils/formatedDates";
 import { DateConverter } from "../lib/dateConverter";
 
 export function useHumanReadableConverter() {
@@ -21,7 +21,7 @@ export function useHumanReadableConverter() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const formattedDate = DateConverter.format(new Date(), DATE_FORMAT_ISO_8601_MILLISECONDS.format, selectedTimeZone);
+    const formattedDate = DateConverter.format(new Date(), DATE_FORMAT_ISO_8601.format, selectedTimeZone);
 
     const [datePart, timePart] = formattedDate.split("T");
     const [year, month, day] = datePart.split("-");
@@ -62,7 +62,7 @@ export function useHumanReadableConverter() {
       if (selectedTimeZone === "UTC") {
         dateInstance = new Date(Date.UTC(y, m, d, h, min, s, ms));
       } else {
-        const localDateStr = DateConverter.format(new Date(y, m, d, h, min, s, ms), DATE_FORMAT_ISO_8601_MILLISECONDS.format, selectedTimeZone);
+        const localDateStr = DateConverter.format(new Date(y, m, d, h, min, s, ms), DATE_FORMAT_ISO_8601.format, selectedTimeZone);
         dateInstance = new Date(localDateStr);
       }
 

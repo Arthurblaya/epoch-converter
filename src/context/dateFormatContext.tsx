@@ -1,6 +1,6 @@
 "use client";
 
-import { DATE_FORMAT_ISO_8601_MILLISECONDS } from "@/utils/formatedDates";
+import { DATE_FORMAT_ISO_8601 } from "@/utils/formatedDates";
 import { createContext, useContext, useState, ReactNode } from "react";
 
 export interface DateFormatContextType {
@@ -13,9 +13,7 @@ const DateFormatContext = createContext<DateFormatContextType | undefined>(
 );
 
 export function DateFormatProvider({ children }: { children: ReactNode }) {
-  const [dateFormat, setDateFormat] = useState(
-    DATE_FORMAT_ISO_8601_MILLISECONDS.format
-  );
+  const [dateFormat, setDateFormat] = useState(DATE_FORMAT_ISO_8601.format);
 
   return (
     <DateFormatContext.Provider value={{ dateFormat, setDateFormat }}>
