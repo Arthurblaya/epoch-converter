@@ -19,7 +19,7 @@ export function useLogConverter() {
     let foundEpoch = false;
 
     const newLog = logInput.replace(timestampRegex, (match) => {
-      let epoch = Number(match);
+      const epoch = Number(match);
       const date = DateConverter.fromEpoch(epoch);
 
       if (isNaN(date.getTime())) return match;
